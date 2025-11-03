@@ -1,0 +1,221 @@
+.modelHero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.modelHero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.modelHero p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.status.available {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.status.unavailable {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.modelContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 3rem 0;
+}
+
+.modelGallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mainPhoto {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.mainPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoThumbnails {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.photoThumbnails img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  border: 2px solid transparent;
+}
+
+.photoThumbnails img:hover {
+  opacity: 0.8;
+}
+
+.photoThumbnails img.active {
+  border-color: #667eea;
+  opacity: 1;
+}
+
+.modelInfo {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.modelInfo h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.infoSection {
+  margin-bottom: 2rem;
+}
+
+.infoSection h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.services,
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.serviceTag,
+.languageTag {
+  background: #e8f4f8;
+  color: #2c3e50;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.languageTag {
+  background: #f0f8ff;
+  color: #2c3e50;
+}
+
+.contactInfo {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 5px;
+  border-left: 4px solid #667eea;
+}
+
+.contactInfo p {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.contactInfo strong {
+  color: #667eea;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  flex: 1;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btnSecondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.loading,
+.notFound {
+  text-align: center;
+  padding: 3rem;
+}
+
+.notFound h2 {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .modelContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .modelHero h1 {
+    font-size: 2rem;
+  }
+  
+  .modelHero p {
+    font-size: 1rem;
+  }
+  
+  .mainPhoto {
+    height: 300px;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+  }
+}
+

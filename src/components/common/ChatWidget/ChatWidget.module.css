@@ -1,0 +1,437 @@
+/* Chat Widget Styles - Black & Pink Theme */
+.chatWidgetContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1002;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Fixed Trigger Button */
+.chatWidgetTrigger {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.chatWidgetTrigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+}
+
+.chatWidgetTrigger svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Minimized State */
+.chatWidgetMinimized {
+  width: 50px;
+  height: 50px;
+  background: #ff6b9d;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(255, 107, 157, 0.3);
+  transition: all 0.3s ease;
+}
+
+.chatWidgetMinimized:hover {
+  background: #e55a8a;
+  transform: translateY(-1px);
+}
+
+.chatWidgetMinimized svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Full Chat Window */
+.chatWidgetWindow {
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* Header */
+.chatWidgetHeader {
+  background: linear-gradient(135deg, #ff6b9d 0%, #8b5cf6 100%);
+  color: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatWidgetAgentInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatWidgetAvatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.chatWidgetAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.chatWidgetOnlineIndicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #00ff00;
+  border: 2px solid white;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.chatWidgetAgentDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatWidgetAgentName {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chatWidgetAgentStatus {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.chatWidgetHeaderActions {
+  display: flex;
+  gap: 8px;
+}
+
+.chatWidgetSettingsBtn,
+.chatWidgetCloseBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.chatWidgetSettingsBtn:hover,
+.chatWidgetCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.chatWidgetSettingsBtn svg,
+.chatWidgetCloseBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Messages Area */
+.chatWidgetMessages {
+  flex: 1;
+  background: #f8f9fa;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chatWidgetMessage {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.chatWidgetMessage.user {
+  flex-direction: row-reverse;
+}
+
+.chatWidgetMessageAvatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.chatWidgetMessageAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatWidgetMessageContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatWidgetMessage.user .chatWidgetMessageContent {
+  align-items: flex-end;
+}
+
+.chatWidgetMessageBubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.chatWidgetMessage.agent .chatWidgetMessageBubble {
+  background: white;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 4px;
+}
+
+.chatWidgetMessage.user .chatWidgetMessageBubble {
+  background: linear-gradient(135deg, #ff6b9d 0%, #8b5cf6 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chatWidgetMessageText {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.chatWidgetMessageTime {
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: right;
+}
+
+.chatWidgetMessage.user .chatWidgetMessageTime {
+  text-align: left;
+}
+
+/* Input Area */
+.chatWidgetInput {
+  background: white;
+  border-top: 1px solid #eee;
+  padding: 16px;
+}
+
+.chatWidgetForm {
+  margin-bottom: 8px;
+}
+
+.chatWidgetInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f9fa;
+  border-radius: 25px;
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+}
+
+.chatWidgetMicBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.chatWidgetMicBtn:hover {
+  background: #e0e0e0;
+  color: #ff6b9d;
+}
+
+.chatWidgetMicBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.chatWidgetTextInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  padding: 8px 0;
+}
+
+.chatWidgetTextInput::placeholder {
+  color: #999;
+}
+
+.chatWidgetSendBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #ff6b9d;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.chatWidgetSendBtn:hover:not(:disabled) {
+  background: #e55a8a;
+  transform: scale(1.1);
+}
+
+.chatWidgetSendBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.chatWidgetSendBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Quick Actions */
+.chatWidgetQuickActions {
+  display: flex;
+  justify-content: center;
+}
+
+.chatWidgetQuickBtn {
+  background: transparent;
+  border: 1px solid #ff6b9d;
+  color: #ff6b9d;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chatWidgetQuickBtn:hover {
+  background: #ff6b9d;
+  color: white;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .chatWidgetContainer {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .chatWidgetTrigger {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .chatWidgetTrigger svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .chatWidgetWindow {
+    width: calc(100vw - 30px);
+    height: 400px;
+    right: 15px;
+    left: 15px;
+  }
+  
+  .chatWidgetMessageBubble {
+    max-width: 85%;
+  }
+  
+  .chatWidgetInputContainer {
+    padding: 6px 12px;
+  }
+  
+  .chatWidgetTextInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Scrollbar Styling */
+.chatWidgetMessages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatWidgetMessages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.chatWidgetMessages::-webkit-scrollbar-thumb {
+  background: #ff6b9d;
+  border-radius: 3px;
+}
+
+.chatWidgetMessages::-webkit-scrollbar-thumb:hover {
+  background: #e55a8a;
+}

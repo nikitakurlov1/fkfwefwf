@@ -1,0 +1,137 @@
+/* Filter Panel Styles based on home.html */
+
+.filters {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.filters h3 {
+  background: linear-gradient(135deg, #f53a66 0%, #8b5cf6 100%);
+  color: white;
+  margin: 0;
+  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.filterRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.formInput, .formSelect {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formInput:focus, .formSelect:focus {
+  outline: none;
+  border-color: #f53a66;
+  box-shadow: 0 0 0 3px rgba(245, 58, 102, 0.1);
+}
+
+.priceRange, .ageRange {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priceRange span, .ageRange span {
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.serviceCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.serviceCheckbox:hover {
+  background: #f8f9fa;
+}
+
+.serviceCheckbox input[type="checkbox"] {
+  margin: 0;
+}
+
+.filterActions {
+  padding: 0 2rem 2rem;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #f53a66 0%, #8b5cf6 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: 500;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 58, 102, 0.3);
+}
+
+.btnSecondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f53a66;
+  border: 1px solid #f53a66;
+}
+
+.btnSecondary:hover {
+  background: #f53a66;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filterRow {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filterActions {
+    padding: 0 1rem 1rem;
+  }
+}
