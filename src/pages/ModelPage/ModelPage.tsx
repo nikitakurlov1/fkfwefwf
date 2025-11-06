@@ -684,12 +684,12 @@ const ModelPage = () => {
               <div className="send-modal-content">
                 <p>Для связи с {model.name} перейдите к нашему сутинеру в Telegram:</p>
                 <div className="send-modal-contact">
-                  <div className="send-modal-telegram">@OneNightSupport</div>
+                  <div className="send-modal-telegram">@AndreyyyyyyyPer</div>
                 </div>
                 <div className="send-modal-actions">
                   <button 
                     className="send-modal-btn-primary"
-                    onClick={() => window.open('https://t.me/@OneNightSupport', '_blank')}
+                    onClick={() => window.open('https://t.me/@AndreyyyyyyyPer', '_blank')}
                   >
                     Перейти в Telegram
                   </button>

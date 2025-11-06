@@ -73,7 +73,7 @@ const ChatWidget = () => {
   }
 
   const handleSupportClick = () => {
-    window.open('https://t.me/OneNightSupport', '_blank')
+    window.open('https://t.me/@AndreyyyyyyyPer', '_blank')
   }
 
   if (!isVisible) return null
