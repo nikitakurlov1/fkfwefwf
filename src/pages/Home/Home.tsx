@@ -395,13 +395,20 @@ const Home = () => {
       {/* Model Creation Banner */}
       <div className="model-creation-banner">
             <div className="model-creation-content">
-              <div className="model-creation-icon">👤</div>
+              <div className="model-creation-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
               <div className="model-creation-text">
                 <h3>Стать моделью</h3>
                 <p>Создайте свою анкету и начните зарабатывать</p>
               </div>
               <Link to="/create-profile" className="model-creation-btn">
-                Создать анкету
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                <span>Создать анкету</span>
               </Link>
             </div>
           </div>

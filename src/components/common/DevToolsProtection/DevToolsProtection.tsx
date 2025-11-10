@@ -2,6 +2,11 @@ import { useEffect } from 'react'
 
 const DevToolsProtection = () => {
   useEffect(() => {
+    // Skip protection in development mode
+    if (import.meta.env.DEV) {
+      return
+    }
+
     // Disable right-click context menu
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault()
