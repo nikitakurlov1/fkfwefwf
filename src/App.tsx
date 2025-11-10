@@ -8,7 +8,7 @@ import DevToolsProtection from './components/common/DevToolsProtection/DevToolsP
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename="/fkfwefwf">
         <DevToolsProtection />
         <ScrollToTop />
         <AppRouter />
