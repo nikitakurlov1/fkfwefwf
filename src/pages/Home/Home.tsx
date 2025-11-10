@@ -12,12 +12,24 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [filteredModels, setFilteredModels] = useState<Model[]>([])
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     const loadModels = async () => {
       try {
-        const response = await fetch('/data/models.json')
-        const data = await response.json()
+        // Проверяем localStorage сначала
+        const stored = localStorage.getItem('onenight_models')
+        let data: Model[]
+        
+        if (stored) {
+          data = JSON.parse(stored)
+        } else {
+          const response = await fetch('/data/models.json')
+          data = await response.json()
+          localStorage.setItem('onenight_models', JSON.stringify(data))
+        }
+        
         setModels(data)
         setFilteredModels(data)
         setLoading(false)
@@ -28,10 +40,40 @@ const Home = () => {
     }
 
     loadModels()
+
+    // Слушаем обновления из админки
+    const handleModelsUpdate = () => {
+      loadModels()
+    }
+
+    window.addEventListener('modelsUpdated', handleModelsUpdate)
+    return () => window.removeEventListener('modelsUpdated', handleModelsUpdate)
   }, [])
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query)
+    let filtered = [...models]
+    
+    if (query.trim()) {
+      filtered = filtered.filter(model => 
+        model.name.toLowerCase().includes(query.toLowerCase()) ||
+        model.location.toLowerCase().includes(query.toLowerCase())
+      )
+    }
+    
+    setFilteredModels(filtered)
+  }
 
   const handleFilterChange = (newFilters: any) => {
     let filtered = [...models]
+
+    // Apply search query first
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(model => 
+        model.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        model.location.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
 
     // Apply status filters
     if (newFilters.verified) {
@@ -185,21 +227,71 @@ const Home = () => {
             ONENIGHT
           </Link>
           <div className="header-actions-dark">
-            <svg className="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg 
+              className="header-icon" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              onClick={() => setShowSearch(!showSearch)}
+              style={{ cursor: 'pointer' }}
+            >
               <circle cx="11" cy="11" r="8"></circle>
               <path d="m21 21-4.35-4.35"></path>
             </svg>
-            <svg className="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg 
+              className="header-icon" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              onClick={() => alert('Уведомления')}
+              style={{ cursor: 'pointer' }}
+            >
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
               <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
             </svg>
-            <svg className="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
+            <Link to="/create-profile" style={{ display: 'flex', alignItems: 'center' }}>
+              <svg 
+                className="header-icon" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2"
+                style={{ cursor: 'pointer' }}
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Search Bar */}
+      {showSearch && (
+        <div className="search-bar-container">
+          <div className="search-bar">
+            <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Поиск по имени или городу..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              autoFocus
+            />
+            <button className="search-close" onClick={() => setShowSearch(false)}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="homepage-nav">
@@ -208,6 +300,7 @@ const Home = () => {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 12h18M3 6h18M3 18h18"/>
             </svg>
+            <span style={{ marginLeft: '8px', fontSize: '0.9rem', fontWeight: 600 }}>Фильтры</span>
           </div>
         </div>
       </div>

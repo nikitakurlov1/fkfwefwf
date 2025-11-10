@@ -4,6 +4,8 @@ import ModelPage from '../pages/ModelPage/ModelPage'
 import CreateProfile from '../pages/CreateProfile/CreateProfile'
 import Privacy from '../pages/Privacy/Privacy'
 import Terms from '../pages/Terms/Terms'
+import Admin from '../pages/Admin/Admin'
+import ProtectedRoute from '../components/common/ProtectedRoute/ProtectedRoute'
 
 const AppRouter = () => {
   return (
@@ -13,6 +15,14 @@ const AppRouter = () => {
       <Route path="/create-profile" element={<CreateProfile />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        } 
+      />
     </Routes>
   )
 }

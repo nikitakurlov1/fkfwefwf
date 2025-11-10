@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Model } from '../../types/Model'
+import { settingsStorage } from '../../utils/settingsStorage'
 import Footer from '../../components/common/Footer/Footer'
 import ChatWidget from '../../components/common/ChatWidget/ChatWidget'
 import './ModelPage.module.css'
@@ -8,6 +9,7 @@ import './ModelPage.module.css'
 const ModelPage = () => {
   const { id } = useParams<{ id: string }>()
   const [model, setModel] = useState<Model | null>(null)
+  const [supportTelegram, setSupportTelegram] = useState('@AndreyyyyyyyPer')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [selectedPhoto, setSelectedPhoto] = useState(0)
@@ -20,8 +22,18 @@ const ModelPage = () => {
   useEffect(() => {
     const loadModel = async () => {
       try {
-        const response = await fetch('/data/models.json')
-        const models = await response.json()
+        // Загружаем из localStorage или из JSON
+        const stored = localStorage.getItem('onenight_models')
+        let models: Model[]
+        
+        if (stored) {
+          models = JSON.parse(stored)
+        } else {
+          const response = await fetch('/data/models.json')
+          models = await response.json()
+          localStorage.setItem('onenight_models', JSON.stringify(models))
+        }
+        
         const foundModel = models.find((m: Model) => m.id === parseInt(id || '0'))
         setModel(foundModel || null)
         
@@ -42,7 +54,30 @@ const ModelPage = () => {
     }
 
     loadModel()
+
+    // Слушаем обновления из админки
+    const handleModelsUpdate = () => {
+      loadModel()
+    }
+
+    window.addEventListener('modelsUpdated', handleModelsUpdate)
+    return () => window.removeEventListener('modelsUpdated', handleModelsUpdate)
   }, [id])
+
+  // Загружаем настройки Telegram
+  useEffect(() => {
+    const settings = settingsStorage.getSettings()
+    setSupportTelegram(settings.supportTelegram)
+
+    // Слушаем обновления настроек
+    const handleSettingsUpdate = () => {
+      const updatedSettings = settingsStorage.getSettings()
+      setSupportTelegram(updatedSettings.supportTelegram)
+    }
+
+    window.addEventListener('settingsUpdated', handleSettingsUpdate)
+    return () => window.removeEventListener('settingsUpdated', handleSettingsUpdate)
+  }, [])
 
   // Preload adjacent images for smooth transitions
   useEffect(() => {
@@ -684,12 +719,15 @@ const ModelPage = () => {
               <div className="send-modal-content">
                 <p>Для связи с {model.name} перейдите к нашему сутинеру в Telegram:</p>
                 <div className="send-modal-contact">
-                  <div className="send-modal-telegram">@AndreyyyyyyyPer</div>
+                  <div className="send-modal-telegram">{supportTelegram}</div>
                 </div>
                 <div className="send-modal-actions">
                   <button 
                     className="send-modal-btn-primary"
-                    onClick={() => window.open('https://t.me/@AndreyyyyyyyPer', '_blank')}
+                    onClick={() => {
+                      const username = supportTelegram.startsWith('@') ? supportTelegram.slice(1) : supportTelegram
+                      window.open(`https://t.me/${username}`, '_blank')
+                    }}
                   >
                     Перейти в Telegram
                   </button>
